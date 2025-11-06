@@ -16,11 +16,11 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
     @action(detail=False, methods=['get'])
     def by_category(self, request):
-        category_slug = request.quary_params.get('category')
+        category_slug = request.query_params.get('category')
         if category_slug:
-            products = self.quaryset.filter(category__slug=category_slug)
+            products = self.queryset.filter(category__slug=category_slug)
         else:
-            products = self.quaryset
+            products = self.queryset
         serializer = self.get_serializer(products, many=True)
         return Response(serializer.data)
 
